@@ -28,8 +28,9 @@ class Course:
 
 def main():
 
-	filename = 'C:\\Users\\Administrator\\Desktop\\2018_Winter_De_Anza_courseData.json'
-
+	filename = 'E:\\Personal_Workflow\\FHDA\\'
+	filename += input("Please enter YYYY_QQQQ_School (Example 2018_Winter_De_Anza):\n")
+	filename += "_courseData.json"
 
 	if filename:
 		with open(filename, 'r') as f:
@@ -52,8 +53,9 @@ def main():
 	print('total course:', total_course)
 	print('loaded course:', len(clist))
 
-
-	client = MongoClient("mongodb+srv://yifeil:Zhirezhixin1@fhdatimedb-jjsjm.mongodb.net/test?retryWrites=true&w=majority")
+	username = input("Enter your username:")
+	password = input("Password:")
+	client = MongoClient("mongodb+srv://" + username +":" + password + "@fhdatimedb-jjsjm.mongodb.net/test?retryWrites=true&w=majority")
 	db = client.get_database('yifeil_test')
 	tc = db.test1
 	for course in clist:
