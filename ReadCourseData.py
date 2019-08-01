@@ -57,6 +57,7 @@ class Lab:
 		self.location = location
 
 
+
 def main():
 
 	filename = 'E:\\Personal_Workflow\\FHDA\\'
@@ -116,14 +117,14 @@ def main():
 			'location' : course.location,
 			'attribute' : course.attribute,
 		}
-		#tc.insert_one(temp_course)
+		tc.insert_one(temp_course)
 
 	for dept in dlist:
 		temp_dept = {
 			'department_name' : dept.deptName,
 			'course_list' : dept.courses
 		}
-		#td.insert_one(temp_dept)
+		td.insert_one(temp_dept)
 
 
 
