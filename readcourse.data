@@ -82,9 +82,9 @@ def main():
 							 c["WL Cap"], c["Instructor"], c["Date"][:5], c["Date"][6:],
 							 c["Location"], c["Attribute"])
 			course_list.append(temp_course)
-			interesting_name = temp_dept.deptName + " " + temp_course.course_num + " " + temp_course.course_title 
-			if interesting_name not in temp_dept.courses:
-				temp_dept.courses.append(interesting_name)
+			lack_dept = temp_dept.deptName + " " + temp_course.course_num + " " + temp_course.course_title 
+			if lack_dept not in temp_dept.courses:
+				temp_dept.courses.append(lack_dept)
 			total_course += 1
 		print('department', department, "has", dep_course_num, "sections.")
 		department_list.append(temp_dept)
