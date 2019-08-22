@@ -124,10 +124,5 @@ def main():
 		}
 		td.insert_one(temp_dept)
 
-
-
-
-
-
 if __name__ == "__main__":
 	main()
