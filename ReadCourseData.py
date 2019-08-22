@@ -2,38 +2,34 @@ import json
 from pymongo import MongoClient
 
 class Course:
-	def __init__(self, crn):
-		self.crn = crn
 
-	def __init__(self, UID, crn, course_num, section_num,\
-		campus, num_credit, course_title, days, startTime, endTime, cap, wl_cap, \
-		instructor_name, startDate, endDate, location, attribute = ''):
-		self.UID = UID
-		self.crn = crn
-		self.course_num = course_num
-		self.section_num = section_num
-		self.campus = campus
-		self.num_credit = num_credit
-		self.course_title = course_title
-		self.days = days
-		self.startTime = startTime
-		self.endTime = endTime
-		self.cap = cap
-		self.wl_cap = wl_cap
-		self.instructor_name = instructor_name
-		self.startDate = startDate
-		self.endDate = endDate
-		self.location = location
-		self.attribute = attribute
+	def __init__(self, **kwargs):
+		self.UID = kwargs.get('UID')
+		self.crn = kwargs.get('crn')
+		self.course_num = kwargs.get('course_num')
+		self.section_num = kwargs.get('section_num')
+		self.campus = kwargs.get('campus')
+		self.num_credit = kwargs.get('num_credit')
+		self.course_title = kwargs.get('course_title')
+		self.days = kwargs.get('days')
+		self.startTime = kwargs.get('startTime')
+		self.endTime = kwargs.get('endTime')
+		self.cap = kwargs.get('cap')
+		self.wl_cap = kwargs.get('wl_cap')
+		self.instructor_name = kwargs.get('instructor_name')
+		self.startDate = kwargs.get('startDate')
+		self.endDate = kwargs.get('endDate')
+		self.location = kwargs.get('location')
+		self.attribute = kwargs.get('attribute')
 		self.lab = list()
 		self.act = list()
 		self.wl_act = list()
 
 class Instructor:
-	def __init__(self, firstName, middleName, lastName):
-		self.firstName = firstName
-		self.middleName = middleName
-		self.lastName = lastName
+	def __init__(self, **kwargs):
+		self.firstName = kwargs.get('firstName')
+		self.middleName = kwargs.get('middleName')
+		self.lastName = kwargs.get('lastName')
 		self.website = ''
 		self.email = ''
 		self.department = list()
@@ -45,51 +41,50 @@ class Department:
 		self.courses = list()
 
 class Lab:
-	def __init__(self, UID, days, startTime, endTime, \
-				startDate, endDate, instructor, location):
-		self.UID = UID
-		self.days = days
-		self.startTime = startTime
-		self.endTime = endTime
-		self.startDate = startDate
-		self.endDate = endDate
-		self.instructor = instructor
-		self.location = location
+	def __init__(self,**kwargs):
+		self.UID = kwargs.get('UID')
+		self.days = kwargs.get('days')
+		self.startTime = kwargs.get('startTime')
+		self.endTime = kwargs.get('endTime')
+		self.startDate = kwargs.get('startDate')
+		self.endDate = kwargs.get('endDate')
+		self.instructor = kwargs.get('instructor')
+		self.location = kwargs.get('location')
 
 
 
 def main():
 
-	filename = 'E:\\Personal_Workflow\\FHDA\\'
-	filename += input("Please enter YYYY_QQQQ_School (Example 2018_Winter_De_Anza):\n")
-	filename += "_courseData.json"
+	filename += input("Please enter file path (Example E:\\Personal_Workflow\\FHDA\\2018_Winter_De_Anza_courseData.json)\n")
 
 	if filename:
 		with open(filename, 'r') as f:
 			course_raw_data = json.load(f)
 
-	clist = []
-	dlist = []
+	course_list = []
+	department_list = []
 	total_course = 0
 	for department in course_raw_data["2018 Winter De Anza"]["CourseData"]:
 		dep_course_num = 0
 		temp_dept = Department(department)
 		for c in course_raw_data["2018 Winter De Anza"]["CourseData"][department]:
 			dep_course_num += 1
-			temp_course = Course(c["CRN"], c["CRN"], c["Crse"], c["Sec"], c["Cmp"], c["Cred"],
-							 c["Title"], c["Days"], c["Time"][:8], c["Time"][9:], c["Cap"], 
-							 c["WL Cap"], c["Instructor"], c["Date"][:5], c["Date"][6:],
-							 c["Location"], c["Attribute"])
-			clist.append(temp_course)
-			interesting_name = temp_dept.deptName + " " + temp_course.course_num + " " + temp_course.course_title 
-			if interesting_name not in temp_dept.courses:
+			temp_course = Course(UID = c["CRN"],crn = c["CRN"], course_num = c["Crse"], 
+							 section_num = c["Sec"], campus = c["Cmp"], num_credit = c["Cred"],
+							 course_title = c["Title"], days = c["Days"], startTime = c["Time"][:8], 
+							 endTime = c["Time"][9:], cap = c["Cap"], 
+							 wl_cap = c["WL Cap"],instructor_name = c["Instructor"],startDate = c["Date"][:5], 
+							 endDate = c["Date"][6:],location = c["Location"],attribute = c["Attribute"])
+			course_list.append(temp_course)
+			course_ineach_dept = "{0} {1} {2}".format(temp_dept.deptName, temp_course.course_num, temp_course.course_title) 
+			if course_ineach_dept not in temp_dept.courses:
 				temp_dept.courses.append(interesting_name)
 			total_course += 1
 		print('department', department, "has", dep_course_num, "sections.")
-		dlist.append(temp_dept)
+		department_list.append(temp_dept)
 
 	print('total course:', total_course)
-	print('loaded course:', len(clist))
+	print('loaded course:', len(course_list))
 
 	username = input("Enter your username:")
 	password = input("Password:")
@@ -97,7 +92,7 @@ def main():
 	db = client.get_database('yifeil_test')
 	tc = db.new_test_courses
 	td = db.new_test_depts
-	for course in clist:
+	for course in course_list:
 		temp_course = {
 			'UID' : course.UID,
 			'crn': course.crn,
@@ -119,7 +114,7 @@ def main():
 		}
 		tc.insert_one(temp_course)
 
-	for dept in dlist:
+	for dept in department_list:
 		temp_dept = {
 			'department_name' : dept.deptName,
 			'course_list' : dept.courses
