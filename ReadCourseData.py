@@ -1,5 +1,8 @@
 import json
+import os
 from pymongo import MongoClient
+from dotenv import load_dotenv
+from pathlib import Path
 
 class Course:
 
@@ -55,7 +58,7 @@ class Lab:
 
 def main():
 
-	filename += input("Please enter file path (Example E:\\Personal_Workflow\\FHDA\\2018_Winter_De_Anza_courseData.json)\n")
+	filename = input('Please enter file path (Example E:\\Personal_Workflow\\FHDA\\DBImport\\2018_Winter_De_Anza_courseData.json)\n')
 
 	if filename:
 		with open(filename, 'r') as f:
@@ -64,34 +67,38 @@ def main():
 	course_list = []
 	department_list = []
 	total_course = 0
-	for department in course_raw_data["2018 Winter De Anza"]["CourseData"]:
+	for department in course_raw_data['2018 Winter De Anza']['CourseData']:
 		dep_course_num = 0
 		temp_dept = Department(department)
-		for c in course_raw_data["2018 Winter De Anza"]["CourseData"][department]:
+		for c in course_raw_data['2018 Winter De Anza']['CourseData'][department]:
 			dep_course_num += 1
-			temp_course = Course(UID = c["CRN"],crn = c["CRN"], course_num = c["Crse"], 
-							 section_num = c["Sec"], campus = c["Cmp"], num_credit = c["Cred"],
-							 course_title = c["Title"], days = c["Days"], startTime = c["Time"][:8], 
-							 endTime = c["Time"][9:], cap = c["Cap"], 
-							 wl_cap = c["WL Cap"],instructor_name = c["Instructor"],startDate = c["Date"][:5], 
-							 endDate = c["Date"][6:],location = c["Location"],attribute = c["Attribute"])
+			temp_course = Course(UID = c['CRN'],crn = c['CRN'], course_num = c['Crse'], 
+							 section_num = c['Sec'], campus = c['Cmp'], num_credit = c['Cred'],
+							 course_title = c['Title'], days = c['Days'], startTime = c['Time'][:8], 
+							 endTime = c['Time'][9:], cap = c['Cap'], 
+							 wl_cap = c['WL Cap'],instructor_name = c['Instructor'],startDate = c['Date'][:5], 
+							 endDate = c['Date'][6:],location = c['Location'],attribute = c['Attribute'])
 			course_list.append(temp_course)
-			course_ineach_dept = "{0} {1} {2}".format(temp_dept.deptName, temp_course.course_num, temp_course.course_title) 
+			course_ineach_dept = '{0} {1} {2}'.format(temp_dept.deptName, temp_course.course_num, temp_course.course_title) 
 			if course_ineach_dept not in temp_dept.courses:
 				temp_dept.courses.append(interesting_name)
 			total_course += 1
-		print('department', department, "has", dep_course_num, "sections.")
+		print('department', department, 'has', dep_course_num, 'sections.')
 		department_list.append(temp_dept)
 
 	print('total course:', total_course)
 	print('loaded course:', len(course_list))
 
-	username = input("Enter your username:")
-	password = input("Password:")
-	client = MongoClient("mongodb+srv://" + username +":" + password + "@fhdatimedb-jjsjm.mongodb.net/test?retryWrites=true&w=majority")
+	env_path = Path('.') / '.env'
+	load_dotenv(dotenv_path=env_path)
+
+	
+	username = os.getenv('Mongo_User')
+	password = input('Mongo_Password')
+	client = MongoClient('mongodb+srv://' + username +':' + password + '@fhdatimedb-jjsjm.mongodb.net/test?retryWrites=true&w=majority')
 	db = client.get_database('yifeil_test')
-	tc = db.new_test_courses
-	td = db.new_test_depts
+	tc = db.new_test_courses #test_courses, just for testing
+	td = db.new_test_depts	#test_depts, just for testing
 	for course in course_list:
 		temp_course = {
 			'UID' : course.UID,
@@ -126,5 +133,5 @@ def main():
 
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
 	main()
