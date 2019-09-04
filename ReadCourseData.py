@@ -74,11 +74,11 @@ def from_raw_to_list(course_raw):
     
  	 for c in course_raw[list(course_raw)[0]]['CourseData'][department]:
 		temp_course = Course(UID = c['CRN'],crn = c['CRN'], course_num = c['Crse'], 
-				     section_num = c['Sec'], campus = c['Cmp'], num_credit = c['Cred'],
-		 		     course_title = c['Title'], days = c['Days'], startTime = c['Time'][:8], 
-				     endTime = c['Time'][9:], cap = c['Cap'], wl_cap = c['WL Cap'],instructor_name = c['Instructor'],
-                		     startDate = c['Date'][:5], endDate = c['Date'][6:],location = c['Location'],
-                   		     attribute = c['Attribute'])
+				   	  section_num = c['Sec'], campus = c['Cmp'], num_credit = c['Cred'],
+		 		   	  course_title = c['Title'], days = c['Days'], startTime = c['Time'][:8], 
+				   	  endTime = c['Time'][9:], cap = c['Cap'], wl_cap = c['WL Cap'],instructor_name = c['Instructor'],
+                		   	  startDate = c['Date'][:5], endDate = c['Date'][6:],location = c['Location'],
+                   		   	  attribute = c['Attribute'])
 	  	test_course.insert_one(temp_course)
       		amount_course = 0
      		amount_course += 1
