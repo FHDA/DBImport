@@ -5,18 +5,18 @@ This module gets lists of Course and Department objects from ReadCourseData.py
 and inserts those data into the desired database
 """
 
-import json, os, sys, FHDAlogger
+import json, os, sys, letslog
 sys.path.append(os.path.dirname(os.path.abspath(__file__))+'\\pb2')
 from google.protobuf.json_format import MessageToDict
 from ReadCourseData import from_raw_to_list
 from configparser import ConfigParser
 from pymongo import MongoClient
 from pymongo import errors as mongoerrors
-from pathlib import Path
 
-logger = FHDAlogger.initiateLogger("_InsertDataInfo", "INFO")
+logger = letslog.Letslog(os.path.dirname(os.path.abspath(__file__))+'\\..\\log')
+logger.initiateLogger("_InsertData", "INFO")
 env_config = ConfigParser()
-env_config.read(Path('..') / 'config' / 'setting.config')
+env_config.read(os.path.dirname(os.path.abspath(__file__))+'\\..\\config\\setting.config')
 mongo_config = env_config['MongoDB']
 QUARTER_INDEX = -16
 
@@ -88,9 +88,9 @@ def main():
     With the help of other functions, this main function could read the data from
     JSON files and put them into desired databases.
     """
-    logger.info('InsertData.py Excecution Started.')
+    logger.log('InsertData.py Excecution Started.')
     config = ConfigParser()
-    config.read(Path('..') / 'config' / env_config['Config']['Config_File_Name'])
+    config.read(os.path.dirname(os.path.abspath(__file__))+'\\..\\config\\'+env_config['Config']['Config_File_Name'])
     path = config['locations']['path']
     year = int(config['data_info']['start_year'])
 
@@ -108,7 +108,7 @@ def main():
         logger.error('MongoDB error has occurred')
     except (FileNotFoundError, KeyError) as err:
         logger.error(err)
-    logger.info('InsertData.py Excecution Finished.')
+    logger.log('InsertData.py Excecution Finished.')
 
 
 if __name__ == "__main__":

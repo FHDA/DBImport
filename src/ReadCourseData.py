@@ -9,8 +9,6 @@ sys.path.append(os.path.dirname(os.path.abspath(__file__))+'\\pb2')
 import course_pb2 as course
 import instructor_pb2 as instructor
 import department_pb2 as department
-from pymongo import MongoClient
-from pathlib import Path
 
 def read_course_proto(json_object, course_list, department_name):
     """Convert course json object to lists of objects, using Protocol Buffer generated class
