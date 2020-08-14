@@ -5,8 +5,8 @@ This module gets lists of Course and Department objects from ReadCourseData.py
 and inserts those data into the desired database
 """
 
-
-import os, json, FHDAlogger
+import json, os, sys, FHDAlogger
+sys.path.append(os.path.dirname(os.path.abspath(__file__))+'\\pb2')
 from google.protobuf.json_format import MessageToDict
 from ReadCourseData import from_raw_to_list
 from configparser import ConfigParser
