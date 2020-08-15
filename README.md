@@ -127,3 +127,9 @@ Reference:
     2010 = 2010_Fall_De_Anza_courseData.json,2010_Fall_Foothill_courseData.json,2010_Summer_De_Anza_courseData.json,2010_Summer_Foothill_courseData.json  
     2011 = 2011_Fall_De_Anza_courseData.json,2011_Fall_Foothill_courseData.json,2011_Spring_De_Anza_courseData.json,2011_Spring_Foothill_courseData.json,2011_Summer_De_Anza_courseData.json,2011_Summer_Foothill_courseData.json,2011_Winter_De_Anza_courseData.json,2011_Winter_Foothill_courseData.json  
     ....
+    
+## .env example
+    
+    log_path = /Users/username/Personal_Workflow/dbworkflow/log/
+    config_setting_path = /Users/username/Personal_Workflow/dbworkflow/config/setting.config
+    config_filepath_path = /Users/username/Personal_Workflow/dbworkflow/config/file_paths.config

@@ -1,0 +1,82 @@
+{
+   "Test Data": {
+      "FetchTime": "Sun Mar 25 14:29:46 2018",
+      "CourseData": {
+         "ACCT": [
+         	{
+               "CRN": "35071",
+               "Crse": "D074",
+               "Sec": "01",
+               "Cmp": "DA",
+               "Cred": "5.000",
+               "Title": "ACCOUNTING ETHICS",
+               "Days": "",
+               "Time": "TBA",
+               "Cap": "40",
+               "Act": "40",
+               "WL Cap": "5",
+               "WL Act": "1",
+               "Instructor": "Walter,Michael,Gough",
+               "Date": "01/08-03/30",
+               "Location": "DA ONLINE",
+               "Attribute": "",
+               "Lab Time": [
+                  {
+                     "Days": "",
+                     "Time": "TBA",
+                     "Instructor": "Christopher,C,Kwak",
+                     "Date": "06/28-08/07",
+                     "Location": "DA LC107"
+                  }
+               ]
+            },
+            {
+                "CRN": "00007",
+                "Crse": "D001A",
+                "Sec": "61Z",
+                "Cmp": "DA",
+                "Cred": "4.000",
+                "Title": "FINAN ACCOUNTNG I",
+                "Days": "",
+                "Time": "TBA",
+                "Cap": "70",
+                "Act": "57",
+                "WL Cap": "10",
+                "WL Act": "0",
+                "Instructor": "Walter,Michael,Gough",
+                "Date": "06/28-08/07",
+                "Location": "DA LC107",
+                "Attribute": "",
+                "Lab Time": [
+                    {
+                        "Days": "",
+                        "Time": "TBA",
+                        "Instructor": "Walter,Michael,Gough",
+                        "Date": "06/28-08/07",
+                        "Location": "DA LC107"
+                    }
+                ]
+             },
+             {
+                "CRN": "00011",
+                "Crse": "D001B",
+                "Sec": "61Z",
+                "Cmp": "DA",
+                "Cred": "4.000",
+                "Title": "FINAN ACCOUNTG II",
+                "Days": "",
+                "Time": "TBA",
+                "Cap": "70",
+                "Act": "43",
+                "WL Cap": "10",
+                "WL Act": "0",
+                "Instructor": "Christopher,C,Kwak",
+                "Date": "06/28-08/07",
+                "Location": "DA LC107",
+                "Attribute": "",
+                "Lab Time": []
+             }
+           ]
+        }
+    }
+}

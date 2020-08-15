@@ -1,4 +1,5 @@
-import logging, datetime
+from dotenv import load_dotenv
+import logging, datetime, os
 
 def initiateLogger(origin, level):
     '''Initiate a logger with given logging level and logging origin
@@ -14,10 +15,16 @@ def initiateLogger(origin, level):
     '''
 
     try:
-        logging.basicConfig(filename = '../log/' + 
-                str(datetime.datetime.now()).replace(' ', '_').replace(':', '')[:17] + origin + '.log', 
-                level=level, 
-                format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+        load_dotenv()
+        root_name = os.getenv('log_path')
+        if root_name == None: ##when env variable is undefined we print it to stdout
+            logInfo = str(datetime.datetime.now()).replace(' ', '_').replace(':', '')[:17] + origin
+            print("log: {0}".format(logInfo))
+        else:
+            logging.basicConfig(filename = root_name +
+                    str(datetime.datetime.now()).replace(' ', '_').replace(':', '')[:17] + origin + '.log',
+                    level=level,
+                    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
     except:
         raise KeyError("Invalid logger level")
     return logging.getLogger(__name__)

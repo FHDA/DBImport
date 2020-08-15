@@ -1,0 +1,133 @@
+{
+   "Test Data": {
+      "FetchTime": "Sun Mar 25 14:29:46 2018",
+      "CourseData": {
+         "ACCT": [
+            {
+               "CRN": "32072",
+               "Crse": "D001A",
+               "Sec": "12",
+               "Cmp": "DA",
+               "Cred": "5.000",
+               "Title": "FINAN ACCOUNTNG I",
+               "Days": "TR",
+               "Time": "11:00 am-01:15 pm",
+               "Cap": "40",
+               "Act": "40",
+               "WL Cap": "5",
+               "WL Act": "0",
+               "Instructor": "Mary,Amelia,Breen",
+               "Date": "01/08-03/30",
+               "Location": "DA L84",
+               "Attribute": "",
+               "Lab Time": []
+            },
+            {
+               "CRN": "35071",
+               "Crse": "D074",
+               "Sec": "01",
+               "Cmp": "DA",
+               "Cred": "5.000",
+               "Title": "ACCOUNTING ETHICS",
+               "Days": "",
+               "Time": "TBA",
+               "Cap": "40",
+               "Act": "40",
+               "WL Cap": "5",
+               "WL Act": "1",
+               "Instructor": "Walter,Michael,Gough",
+               "Date": "01/08-03/30",
+               "Location": "DA ONLINE",
+               "Attribute": "",
+               "Lab Time": [
+                  {
+                     "Days": "",
+                     "Time": "TBA",
+                     "Instructor": "Christopher,C,Kwak",
+                     "Date": "06/28-08/07",
+                     "Location": "DA LC107"
+                  }
+               ]
+            },
+            {
+               "CRN": "31138",
+               "Crse": "D105",
+               "Sec": "01",
+               "Cmp": "DA",
+               "Cred": "1.000",
+               "Title": "BASIC FINANCIAL ACCT PROCEDURE",
+               "Days": "T",
+               "Time": "05:00 pm-05:50 pm",
+               "Cap": "40",
+               "Act": "17",
+               "WL Cap": "5",
+               "WL Act": "0",
+               "Instructor": "Laurienne,Bermudez,Hammond",
+               "Date": "01/08-03/30",
+               "Location": "DA AT202",
+               "Attribute": "",
+               "Lab Time": []
+            }
+         ],
+         "ADMJ": [
+            {
+               "CRN": "00053",
+               "Crse": "D001",
+               "Sec": "01",
+               "Cmp": "DA",
+               "Cred": "4.000",
+               "Title": "INTRO TO ADMIN OF JUSTICE",
+               "Days": "MTWR",
+               "Time": "08:30 am-09:20 am",
+               "Cap": "42",
+               "Act": "41",
+               "WL Cap": "15",
+               "WL Act": "0",
+               "Instructor": "Marni,Kristine,Lawlor",
+               "Date": "01/08-03/30",
+               "Location": "DA L22",
+               "Attribute": "",
+               "Lab Time": []
+            },
+            {
+               "CRN": "00054",
+               "Crse": "D003",
+               "Sec": "01",
+               "Cmp": "DA",
+               "Cred": "4.000",
+               "Title": "CONCEPTS OF CRIM LAW (CP 2)",
+               "Days": "MTWR",
+               "Time": "09:30 am-10:20 am",
+               "Cap": "30",
+               "Act": "29",
+               "WL Cap": "15",
+               "WL Act": "0",
+               "Instructor": "Terry,R,Ellis",
+               "Date": "01/08-03/30",
+               "Location": "DA L22",
+               "Attribute": "",
+               "Lab Time": []
+            },
+            {
+               "CRN": "35528",
+               "Crse": "D064Y",
+               "Sec": "56",
+               "Cmp": "DA",
+               "Cred": "3.000",
+               "Title": "ADMJ INTRNSHIP",
+               "Days": "MWF",
+               "Time": "12:30 pm-03:20 pm",
+               "Cap": "20",
+               "Act": "0",
+               "WL Cap": "0",
+               "WL Act": "0",
+               "Instructor": "Terry,R,Ellis",
+               "Date": "01/08-03/30",
+               "Location": "DA L13C",
+               "Attribute": "",
+               "Lab Time": []
+            }
+        ]
+      }
+   }
+}

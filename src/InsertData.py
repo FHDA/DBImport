@@ -13,12 +13,25 @@ from configparser import ConfigParser
 from pymongo import MongoClient
 from pymongo import errors as mongoerrors
 from pathlib import Path
+from dotenv import load_dotenv
+
+##read env variable
+load_dotenv()
+setting_config = os.getenv('config_setting_path')
+filepaths_config = os.getenv('config_filepath_path')
 
 logger = FHDAlogger.initiateLogger("_InsertDataInfo", "INFO")
-env_config = ConfigParser()
-env_config.read(Path('..') / 'config' / 'setting.config')
-mongo_config = env_config['MongoDB']
+try:
+    env_config = ConfigParser()
+    env_config.read(setting_config)
+    mongo_config = env_config['MongoDB']
+except FileNotFoundError:
+    raise
+except:
+    raise KeyError('Invalid index: MongoDB')
+
 QUARTER_INDEX = -16
+
 
 def get_db():
     """Get MongoDB username and password from the config file and return the desired database.
@@ -88,13 +101,13 @@ def main():
     With the help of other functions, this main function could read the data from
     JSON files and put them into desired databases.
     """
-    logger.info('InsertData.py Excecution Started.')
-    config = ConfigParser()
-    config.read(Path('..') / 'config' / env_config['Config']['Config_File_Name'])
-    path = config['locations']['path']
-    year = int(config['data_info']['start_year'])
-
     try:
+        print("start upload...")
+        logger.info('InsertData.py Excecution Started.')
+        config = ConfigParser()
+        config.read(filepaths_config)
+        path = config['locations']['path']
+        year = int(config['data_info']['start_year'])
         while config['locations'][str(year)]:
             all_quarters_in_year = config['locations'][str(year)].split(',')
             for each_quarter in all_quarters_in_year:
@@ -108,7 +121,8 @@ def main():
         logger.error('MongoDB error has occurred')
     except (FileNotFoundError, KeyError) as err:
         logger.error(err)
-    logger.info('InsertData.py Excecution Finished.')
+    finally:
+        logger.info('InsertData.py Excecution Finished.')
 
 
 if __name__ == "__main__":

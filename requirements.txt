@@ -74,3 +74,4 @@ typed-ast==1.4.0
 wcwidth==0.1.7
 wrapt==1.11.2
 zipp==0.6.0
+python-dotenv==0.14.0
