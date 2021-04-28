@@ -4,13 +4,11 @@
 This module helps the runner to read course data from json files and return
 lists of Course and Department objects for databse insertion
 """
-
-import json, os
+import json, os, sys
+sys.path.append(os.path.dirname(os.path.abspath(__file__))+'\\pb2')
 import course_pb2 as course
 import instructor_pb2 as instructor
 import department_pb2 as department
-from pymongo import MongoClient
-from pathlib import Path
 
 def read_course_proto(json_object, course_list, department_name):
     """Convert course json object to lists of objects, using Protocol Buffer generated class
@@ -46,11 +44,9 @@ def read_course_proto(json_object, course_list, department_name):
         temp_course.course_title = each_course['Title']
         temp_course.startTime = each_course['Time'][:8]
         temp_course.endTime = each_course['Time'][9:]
-        temp_course.cap = int(each_course['Cap'])
-        temp_course.wl_cap = int(each_course['WL Cap'])
         temp_course.instructor_name = each_course['Instructor']
-        temp_course.startDate = each_course['Date'][:5]
-        temp_course.endDate = each_course['Date'][6:]
+        temp_course.startDate = each_course['Date (MM/DD)'][:5]
+        temp_course.endDate = each_course['Date (MM/DD)'][6:]
         temp_course.location = each_course['Location']
         temp_course.days = 'ONLINE' if ('ONLINE' in temp_course.location) else each_course['Days']
         temp_course.attribute = each_course['Attribute']
@@ -73,14 +69,14 @@ def read_lab_time(each_course, temp_course):
         the course object with its lab session
 
     """
-    if each_course['Lab Time']:
+    if each_course['lab']:
         temp_lab = temp_course.lab.add()
         temp_lab.UID = temp_course.UID + 'L'
-        lab_info = each_course['Lab Time'][0]
-        temp_lab.days = lab_info['Days']
+        lab_info = each_course['lab'][0]
+        temp_lab.days = 'ONLINE' if ('ONLINE' in lab_info['Location']) else lab_info['Days']
         temp_lab.time = lab_info['Time']
-        temp_lab.startDate = lab_info['Date'][:5]
-        temp_lab.endDate = lab_info['Date'][6:]
+        temp_lab.startDate = lab_info['Date (MM/DD)'][:5]
+        temp_lab.endDate = lab_info['Date (MM/DD)'][6:]
         temp_lab.instructor = lab_info['Instructor']
         temp_lab.location = lab_info['Location']
     return temp_course
