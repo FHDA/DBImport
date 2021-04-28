@@ -93,6 +93,7 @@ def main():
     config.read(os.path.dirname(os.path.abspath(__file__))+'\\..\\config\\'+env_config['Config']['Config_File_Name'])
     logger.log('Config read completed.')
     path = config['locations']['path']
+    logger.log('Processing data files located in: ' + path)
     year = int(config['data_info']['start_year'])
 
     try:
@@ -102,6 +103,7 @@ def main():
                 quarter_name = each_quarter[:QUARTER_INDEX].replace('_', ' ')
                 logger.log('Inserting %s' % quarter_name)
                 filename = path + each_quarter
+                logger.log(filename)
                 course_raw_data = check_file_open(filename)
                 course_list, department_list = from_raw_to_list(course_raw_data, quarter_name)
                 insert_data(course_list, department_list, quarter_name)
