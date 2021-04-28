@@ -91,6 +91,7 @@ def main():
     logger.log('InsertData.py Excecution Started.')
     config = ConfigParser()
     config.read(os.path.dirname(os.path.abspath(__file__))+'\\..\\config\\'+env_config['Config']['Config_File_Name'])
+    logger.log('Config read completed.')
     path = config['locations']['path']
     year = int(config['data_info']['start_year'])
 
@@ -99,10 +100,12 @@ def main():
             all_quarters_in_year = config['locations'][str(year)].split(',')
             for each_quarter in all_quarters_in_year:
                 quarter_name = each_quarter[:QUARTER_INDEX].replace('_', ' ')
+                logger.log('Inserting %s' % quarter_name)
                 filename = path + each_quarter
                 course_raw_data = check_file_open(filename)
                 course_list, department_list = from_raw_to_list(course_raw_data, quarter_name)
                 insert_data(course_list, department_list, quarter_name)
+                logger.log('Inserted %s' % quarter_name)
             year += 1
     except mongoerrors.PyMongoError:
         logger.error('MongoDB error has occurred')
