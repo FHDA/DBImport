@@ -53,7 +53,7 @@ def check_file_open(filename):
     raise FileNotFoundError('File {filename} is not found!')
 
 
-def insert_data(course_list, dept_list, quarter_name):
+def insert_data(course_list, dept_list, seat_dict, quarter_name):
     """Insert data into database.
 
     Get every single Course and Department object from the lists and
@@ -63,6 +63,7 @@ def insert_data(course_list, dept_list, quarter_name):
     Args:
         course_list: the list of Course objects
         dept_list: the list of Department objects
+        seat_list: the dictionary of enrollment data
         quarter_name: str, the name of the quarter
     Raises:
         pymongo.errors: possibly connection errors or configuration errors
@@ -73,13 +74,26 @@ def insert_data(course_list, dept_list, quarter_name):
     database = get_db()
     course_collection = database[quarter_name + ' courses']
     dept_collection = database[quarter_name + ' departments']
+    seat_collection = database[quarter_name + ' seats']
 
-    for course in course_list:
-        temp_course = MessageToDict(course)
-        course_collection.insert_one(temp_course)
-    for dept in dept_list:
-        temp_dept = MessageToDict(dept)
-        dept_collection.insert_one(temp_dept)
+    # for course in course_list:
+    #     temp_course = MessageToDict(course)
+    #     course_collection.update(temp_course, temp_course, upsert=True)
+    # for dept in dept_list:
+    #     temp_dept = MessageToDict(dept)
+    #     dept_collection.update(temp_dept, temp_dept, upsert=True)
+    for crn in seat_dict.keys():
+        inserted_seat = seat_collection.find_one({"UID": crn})
+        if not inserted_seat:
+            inserted_seat = {"UID": crn, crn: [seat_dict[crn]], 'latest': seat_dict[crn]['fetch_time_datetime']}
+            seat_collection.replace_one({'UID': crn}, inserted_seat, upsert=True)
+        else:
+            if seat_dict[crn]['fetch_time_datetime'] > inserted_seat['latest']:
+                inserted_seat[crn].append(seat_dict[crn])
+                inserted_seat['latest'] = seat_dict[crn]['fetch_time_datetime']
+                seat_collection.replace_one({'UID': crn}, inserted_seat, upsert=True)
+            else:
+            	logger.log(1)
 
 
 def main():
@@ -105,12 +119,12 @@ def main():
                 filename = path + each_quarter
                 logger.log(filename)
                 course_raw_data = check_file_open(filename)
-                course_list, department_list = from_raw_to_list(course_raw_data, quarter_name)
-                insert_data(course_list, department_list, quarter_name)
+                course_list, department_list, seat_dict = from_raw_to_list(course_raw_data, quarter_name)
+                insert_data(course_list, department_list, seat_dict, quarter_name)
                 logger.log('Inserted %s' % quarter_name)
             year += 1
-    except mongoerrors.PyMongoError:
-        logger.error('MongoDB error has occurred')
+    except mongoerrors.PyMongoError as err:
+        logger.error(f'MongoDB error has occurred: {err}')
     except (FileNotFoundError, KeyError) as err:
         logger.error(err)
     logger.log('InsertData.py Excecution Finished.')
