@@ -92,8 +92,6 @@ def insert_data(course_list, dept_list, seat_dict, quarter_name):
                 inserted_seat[crn].append(seat_dict[crn])
                 inserted_seat['latest'] = seat_dict[crn]['fetch_time_datetime']
                 seat_collection.replace_one({'UID': crn}, inserted_seat, upsert=True)
-            else:
-            	logger.log(1)
 
 
 def main():
