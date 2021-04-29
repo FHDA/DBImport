@@ -76,22 +76,32 @@ def insert_data(course_list, dept_list, seat_dict, quarter_name):
     dept_collection = database[quarter_name + ' departments']
     seat_collection = database[quarter_name + ' seats']
 
-    # for course in course_list:
-    #     temp_course = MessageToDict(course)
-    #     course_collection.update(temp_course, temp_course, upsert=True)
-    # for dept in dept_list:
-    #     temp_dept = MessageToDict(dept)
-    #     dept_collection.update(temp_dept, temp_dept, upsert=True)
-    for crn in seat_dict.keys():
-        inserted_seat = seat_collection.find_one({"UID": crn})
-        if not inserted_seat:
-            inserted_seat = {"UID": crn, crn: [seat_dict[crn]], 'latest': seat_dict[crn]['fetch_time_datetime']}
-            seat_collection.replace_one({'UID': crn}, inserted_seat, upsert=True)
-        else:
-            if seat_dict[crn]['fetch_time_datetime'] > inserted_seat['latest']:
-                inserted_seat[crn].append(seat_dict[crn])
-                inserted_seat['latest'] = seat_dict[crn]['fetch_time_datetime']
-                seat_collection.replace_one({'UID': crn}, inserted_seat, upsert=True)
+    for course in course_list:
+        temp_course = MessageToDict(course)
+        course_collection.update(temp_course, temp_course, upsert=True)
+    for dept in dept_list:
+        temp_dept = MessageToDict(dept)
+        dept_collection.update(temp_dept, temp_dept, upsert=True)
+    inserted_seats = seat_collection.find()
+    if (quarter_name + ' seats') not in database.list_collection_names() or inserted_seats.count() == 0:
+        for crn in seat_dict.keys():
+            inserted_seat = {'UID': crn, 'latest': seat_dict[crn]['fetch_time_datetime'], 
+                                'fetch_time_datetime': [seat_dict[crn]['fetch_time_datetime']], 
+                                'fetch_time': [seat_dict[crn]['fetch_time']], 'act': [seat_dict[crn]['act']],
+                                'rem': [seat_dict[crn]['rem']], 'wl_rem': [seat_dict[crn]['wl_rem']]}
+            seat_collection.insert_one(inserted_seat)
+    else:
+        for inserted_seat in inserted_seats:
+            update_seat = inserted_seat
+            crn = inserted_seat['UID']
+            if seat_dict[crn]['fetch_time_datetime'] > update_seat['latest']:
+                update_seat['fetch_time_datetime'].append(seat_dict[crn]['fetch_time_datetime'])
+                update_seat['fetch_time'].append(seat_dict[crn]['fetch_time'])
+                update_seat['act'].append(seat_dict[crn]['act'])
+                update_seat['rem'].append(seat_dict[crn]['rem'])
+                update_seat['wl_rem'].append(seat_dict[crn]['wl_rem'])
+                update_seat['latest'] = seat_dict[crn]['fetch_time_datetime']
+                seat_collection.replace_one({'UID': crn}, update_seat)
 
 
 def main():
