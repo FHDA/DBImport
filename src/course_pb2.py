@@ -18,7 +18,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='dbimport',
   syntax='proto2',
   serialized_options=None,
-  serialized_pb=b'\n\x0c\x63ourse.proto\x12\x08\x64\x62import\"\xf0\x03\n\x06\x43ourse\x12\x0b\n\x03UID\x18\x01 \x02(\t\x12\x0b\n\x03\x63rn\x18\x02 \x02(\t\x12\x12\n\ncourse_num\x18\x03 \x02(\t\x12\x13\n\x0bsection_num\x18\x04 \x02(\t\x12\x0e\n\x06\x63\x61mpus\x18\x05 \x02(\t\x12\x12\n\nnum_credit\x18\x06 \x02(\x02\x12\x14\n\x0c\x63ourse_title\x18\x07 \x02(\t\x12\x0c\n\x04\x64\x61ys\x18\x08 \x01(\t\x12\x11\n\tstartTime\x18\t \x01(\t\x12\x0f\n\x07\x65ndTime\x18\n \x01(\t\x12\x0b\n\x03\x63\x61p\x18\x0b \x01(\x05\x12\x0e\n\x06wl_cap\x18\x0c \x01(\x05\x12\x17\n\x0finstructor_name\x18\r \x01(\t\x12\x11\n\tstartDate\x18\x0e \x01(\t\x12\x0f\n\x07\x65ndDate\x18\x0f \x01(\t\x12\x10\n\x08location\x18\x10 \x01(\t\x12\x11\n\tattribute\x18\x11 \x01(\t\x12!\n\x03lab\x18\x12 \x03(\x0b\x32\x14.dbimport.Course.Lab\x12\x0b\n\x03\x61\x63t\x18\x13 \x03(\x05\x12\x0e\n\x06wl_act\x18\x14 \x03(\x05\x1ax\n\x03Lab\x12\x0b\n\x03UID\x18\x01 \x02(\t\x12\x0c\n\x04\x64\x61ys\x18\x02 \x01(\t\x12\x0c\n\x04time\x18\x03 \x01(\t\x12\x11\n\tstartDate\x18\x04 \x01(\t\x12\x0f\n\x07\x65ndDate\x18\x05 \x01(\t\x12\x12\n\ninstructor\x18\x06 \x01(\t\x12\x10\n\x08location\x18\x07 \x01(\t'
+  serialized_pb=b'\n\x0c\x63ourse.proto\x12\x08\x64\x62import\"\xfd\x03\n\x06\x43ourse\x12\x0b\n\x03UID\x18\x01 \x02(\t\x12\x0b\n\x03\x63rn\x18\x02 \x02(\t\x12\x12\n\ncourse_num\x18\x03 \x02(\t\x12\x13\n\x0bsection_num\x18\x04 \x02(\t\x12\x0e\n\x06\x63\x61mpus\x18\x05 \x02(\t\x12\x12\n\nnum_credit\x18\x06 \x02(\x02\x12\x14\n\x0c\x63ourse_title\x18\x07 \x02(\t\x12\x0c\n\x04\x64\x61ys\x18\x08 \x01(\t\x12\x11\n\tstartTime\x18\t \x01(\t\x12\x0f\n\x07\x65ndTime\x18\n \x01(\t\x12\x0b\n\x03\x63\x61p\x18\x0b \x01(\x05\x12\x0b\n\x03rem\x18\x0c \x01(\x05\x12\x0e\n\x06wl_rem\x18\r \x01(\x05\x12\x17\n\x0finstructor_name\x18\x0e \x01(\t\x12\x11\n\tstartDate\x18\x0f \x01(\t\x12\x0f\n\x07\x65ndDate\x18\x10 \x01(\t\x12\x10\n\x08location\x18\x11 \x01(\t\x12\x11\n\tattribute\x18\x12 \x01(\t\x12!\n\x03lab\x18\x13 \x03(\x0b\x32\x14.dbimport.Course.Lab\x12\x0b\n\x03\x61\x63t\x18\x14 \x03(\x05\x12\x0e\n\x06wl_act\x18\x15 \x03(\x05\x1ax\n\x03Lab\x12\x0b\n\x03UID\x18\x01 \x02(\t\x12\x0c\n\x04\x64\x61ys\x18\x02 \x01(\t\x12\x0c\n\x04time\x18\x03 \x01(\t\x12\x11\n\tstartDate\x18\x04 \x01(\t\x12\x0f\n\x07\x65ndDate\x18\x05 \x01(\t\x12\x12\n\ninstructor\x18\x06 \x01(\t\x12\x10\n\x08location\x18\x07 \x01(\t'
 )
 
 
@@ -92,8 +92,8 @@ _COURSE_LAB = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=403,
-  serialized_end=523,
+  serialized_start=416,
+  serialized_end=536,
 )
 
 _COURSE = _descriptor.Descriptor(
@@ -181,64 +181,71 @@ _COURSE = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='wl_cap', full_name='dbimport.Course.wl_cap', index=11,
+      name='rem', full_name='dbimport.Course.rem', index=11,
       number=12, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='instructor_name', full_name='dbimport.Course.instructor_name', index=12,
-      number=13, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
+      name='wl_rem', full_name='dbimport.Course.wl_rem', index=12,
+      number=13, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='startDate', full_name='dbimport.Course.startDate', index=13,
+      name='instructor_name', full_name='dbimport.Course.instructor_name', index=13,
       number=14, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='endDate', full_name='dbimport.Course.endDate', index=14,
+      name='startDate', full_name='dbimport.Course.startDate', index=14,
       number=15, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='location', full_name='dbimport.Course.location', index=15,
+      name='endDate', full_name='dbimport.Course.endDate', index=15,
       number=16, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='attribute', full_name='dbimport.Course.attribute', index=16,
+      name='location', full_name='dbimport.Course.location', index=16,
       number=17, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='lab', full_name='dbimport.Course.lab', index=17,
-      number=18, type=11, cpp_type=10, label=3,
+      name='attribute', full_name='dbimport.Course.attribute', index=17,
+      number=18, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='lab', full_name='dbimport.Course.lab', index=18,
+      number=19, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='act', full_name='dbimport.Course.act', index=18,
-      number=19, type=5, cpp_type=1, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='wl_act', full_name='dbimport.Course.wl_act', index=19,
+      name='act', full_name='dbimport.Course.act', index=19,
       number=20, type=5, cpp_type=1, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='wl_act', full_name='dbimport.Course.wl_act', index=20,
+      number=21, type=5, cpp_type=1, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -256,7 +263,7 @@ _COURSE = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=27,
-  serialized_end=523,
+  serialized_end=536,
 )
 
 _COURSE_LAB.containing_type = _COURSE

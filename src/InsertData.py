@@ -9,7 +9,6 @@ and inserts those data into the desired database
 import os, json, FHDAlogger
 from google.protobuf.json_format import MessageToDict
 from ReadCourseData import from_raw_to_list
-from configparser import ConfigParser
 from pymongo import MongoClient
 from pymongo import errors as mongoerrors
 from pathlib import Path
@@ -17,24 +16,12 @@ from dotenv import load_dotenv
 
 ##read env variable
 load_dotenv()
-setting_config = os.getenv('config_setting_path')
-filepaths_config = os.getenv('config_filepath_path')
-
 logger = FHDAlogger.initiateLogger("_InsertDataInfo", "INFO")
-try:
-    env_config = ConfigParser()
-    env_config.read(setting_config)
-    mongo_config = env_config['MongoDB']
-except FileNotFoundError:
-    raise
-except:
-    raise KeyError('Invalid index: MongoDB')
 
 QUARTER_INDEX = -16
 
-
 def get_db():
-    """Get MongoDB username and password from the config file and return the desired database.
+    """Get MongoDB username and password from the env variables and return the desired database.
 
     Raises:
         pymongo.errors: possibly connection errors or conficuration errors
@@ -42,10 +29,10 @@ def get_db():
         The database object
 
     """
-    username, password = mongo_config['Mongo_User'], mongo_config['Mongo_Password']
-    db_name = mongo_config['Mongo_DBName']
+    username, password = os.getenv('Mongo_User'), os.getenv('Mongo_Password')
+    db_name = os.getenv('Mongo_DBName')
     client = MongoClient('mongodb+srv://' + username + ':' + password
-                         + mongo_config['Mongo_Postfix'])
+                         + os.getenv('Mongo_Postfix'))
     return client.get_database(db_name)
 
 
@@ -104,12 +91,10 @@ def main():
     try:
         print("start upload...")
         logger.info('InsertData.py Excecution Started.')
-        config = ConfigParser()
-        config.read(filepaths_config)
-        path = config['locations']['path']
-        year = int(config['data_info']['start_year'])
-        while config['locations'][str(year)]:
-            all_quarters_in_year = config['locations'][str(year)].split(',')
+        path = os.getenv('data_path')
+        year = int(os.getenv('start_year'))
+        while os.getenv(str(year)):
+            all_quarters_in_year = os.getenv(str(year)).split(',')
             for each_quarter in all_quarters_in_year:
                 quarter_name = each_quarter[:QUARTER_INDEX].replace('_', ' ')
                 filename = path + each_quarter
