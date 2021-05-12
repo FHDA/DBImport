@@ -10,10 +10,9 @@ from configparser import ConfigParser
 from pathlib import Path
 from InsertData import check_file_open, insert_data, get_db
 from ReadCourseData import from_raw_to_list
+from dotenv import load_dotenv
 
-env_config = ConfigParser()
-env_config.read(Path.cwd() / 'config' / 'setting.config')
-mongo_config = env_config['MongoDB']
+load_dotenv()
 
 def test_insert_data_correctness():
     """Test if insert_data() returns the right content."""

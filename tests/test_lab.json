@@ -4,6 +4,7 @@
       "CourseData": {
          "ACCT": [
          	{
+               "Select": "C",
                "CRN": "35071",
                "Crse": "D074",
                "Sec": "01",
@@ -12,25 +13,24 @@
                "Title": "ACCOUNTING ETHICS",
                "Days": "",
                "Time": "TBA",
-               "Cap": "40",
                "Act": "40",
-               "WL Cap": "5",
-               "WL Act": "1",
+               "Rem": "5",
+               "WL Rem": "5",
                "Instructor": "Walter,Michael,Gough",
-               "Date": "01/08-03/30",
+               "Date (MM/DD)": "01/08-03/30",
                "Location": "DA ONLINE",
                "Attribute": "",
-               "Lab Time": [
+               "lab": [
                   {
-                     "Days": "",
                      "Time": "TBA",
                      "Instructor": "Christopher,C,Kwak",
-                     "Date": "06/28-08/07",
+                     "Date (MM/DD)": "06/28-08/07",
                      "Location": "DA LC107"
                   }
                ]
             },
             {
+                "Select": "C",
                 "CRN": "00007",
                 "Crse": "D001A",
                 "Sec": "61Z",
@@ -39,25 +39,24 @@
                 "Title": "FINAN ACCOUNTNG I",
                 "Days": "",
                 "Time": "TBA",
-                "Cap": "70",
                 "Act": "57",
-                "WL Cap": "10",
-                "WL Act": "0",
+                "Rem": "3",
+                "WL Rem": "10",
                 "Instructor": "Walter,Michael,Gough",
-                "Date": "06/28-08/07",
+                "Date (MM/DD)": "06/28-08/07",
                 "Location": "DA LC107",
                 "Attribute": "",
-                "Lab Time": [
+                "lab": [
                     {
-                        "Days": "",
                         "Time": "TBA",
                         "Instructor": "Walter,Michael,Gough",
-                        "Date": "06/28-08/07",
+                        "Date (MM/DD)": "06/28-08/07",
                         "Location": "DA LC107"
                     }
                 ]
              },
              {
+                "Select": "C",
                 "CRN": "00011",
                 "Crse": "D001B",
                 "Sec": "61Z",
@@ -66,15 +65,14 @@
                 "Title": "FINAN ACCOUNTG II",
                 "Days": "",
                 "Time": "TBA",
-                "Cap": "70",
                 "Act": "43",
-                "WL Cap": "10",
-                "WL Act": "0",
+                "Rem": "7",
+                "WL Rem": "10",
                 "Instructor": "Christopher,C,Kwak",
-                "Date": "06/28-08/07",
+                "Date (MM/DD)": "06/28-08/07",
                 "Location": "DA LC107",
                 "Attribute": "",
-                "Lab Time": []
+                "lab": []
              }
            ]
         }
