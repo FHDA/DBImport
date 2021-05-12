@@ -35,7 +35,7 @@ do the following:
 npm install
 pip install -r requirements.txt
 ```
-  
+
 We require all contributors to write docstring so the codes are easy to follow for other contributors. 
 One of the software development processes is Test-driven Development(TDD). We highly recommended you *write at least one test before code*  
 However, the test is recommended but not required.  
@@ -106,30 +106,19 @@ Reference:
 1. https://gist.github.com/joshbuchea/6f47e86d2510bce28f8e7f42ae84c716
 2. https://github.com/joelparkerhenderson/git_commit_message#begin-with-a-short-summary-line
 
-## setting.config format  
- 
-    [MongoDB]    
-    Mongo_User = <db username>  
-    Mongo_Password = <db password>  
-    Mongo_DBName = <db name>  
-    Mongo_Postfix = <db connection string> for example @something.mongodb.net/test?retryWrites=true&w=majority  
-       
-    [Config]  
-    Config_File_Name = file_paths.config
+## .env or System Environment Variables Setting Instruction
 
-## file_paths.config example
-  
-    [data_info]  
-    start_year = 2010  
-    
-    [locations]  
-    path = E:\Personal_Workflow\FHDA\DBImport\course_data\  
-    2010 = 2010_Fall_De_Anza_courseData.json,2010_Fall_Foothill_courseData.json,2010_Summer_De_Anza_courseData.json,2010_Summer_Foothill_courseData.json  
-    2011 = 2011_Fall_De_Anza_courseData.json,2011_Fall_Foothill_courseData.json,2011_Spring_De_Anza_courseData.json,2011_Spring_Foothill_courseData.json,2011_Summer_De_Anza_courseData.json,2011_Summer_Foothill_courseData.json,2011_Winter_De_Anza_courseData.json,2011_Winter_Foothill_courseData.json  
-    ....
-    
-## .env example
-    
     log_path = /Users/username/Personal_Workflow/dbworkflow/log/
-    config_setting_path = /Users/username/Personal_Workflow/dbworkflow/config/setting.config
-    config_filepath_path = /Users/username/Personal_Workflow/dbworkflow/config/file_paths.config
+    data_path = /Users/username/Personal_Workflow/dbworkflow/course-data/
+    Mongo_User = <username of Mongodb login>
+    Mongo_Password = <password of Mongodb login>
+    Mongo_Postfix = <db connection string>(e.g. @something.mongodb.net/test?retryWrites=true&w=majority)
+    start_year = <the first year you want to start with>(e.g. 2020)
+    <year_1> = <year_1>_<quarter>_<schoole>_courseData.json,...
+    <year_2> = <year_2>_<quarter>_<schoole>_courseData.json,...
+    .
+    .
+    .
+    <year_n> = <year_n>_<quarter>_<schoole>_courseData.json,...
+
+Note: <year_1>...<year_n> should be consecutive and start_year should be between <year_1> and <year_n>
