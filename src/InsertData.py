@@ -6,7 +6,7 @@ and inserts those data into the desired database
 """
 
 
-import os, json, FHDAlogger
+import os, json, letslog
 from google.protobuf.json_format import MessageToDict
 from ReadCourseData import from_raw_to_list
 from pymongo import MongoClient
@@ -16,7 +16,8 @@ from dotenv import load_dotenv
 
 ##read env variable
 load_dotenv()
-logger = FHDAlogger.initiateLogger("_InsertDataInfo", "INFO")
+logger = letslog.Letslog(os.path.dirname(os.path.abspath(__file__))+'/../log')
+logger.initiateLogger("_InsertData", "INFO")
 
 QUARTER_INDEX = -16
 
@@ -90,7 +91,7 @@ def main():
     """
     try:
         print("start upload...")
-        logger.info('InsertData.py Excecution Started.')
+        logger.log('InsertData.py Excecution Started.')
         path = os.getenv('data_path')
         year = int(os.getenv('start_year'))
         while os.getenv(str(year)):
@@ -107,7 +108,7 @@ def main():
     except (FileNotFoundError, KeyError) as err:
         logger.error(err)
     finally:
-        logger.info('InsertData.py Excecution Finished.')
+        logger.log('InsertData.py Excecution Finished.')
 
 
 if __name__ == "__main__":

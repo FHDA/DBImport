@@ -6,7 +6,6 @@ This module tests the correctness and exceptions of InsertData/inser_data()
 
 import sys
 sys.path.append('./src')
-from configparser import ConfigParser
 from pathlib import Path
 from InsertData import check_file_open, insert_data, get_db
 from ReadCourseData import from_raw_to_list

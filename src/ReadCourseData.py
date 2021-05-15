@@ -5,7 +5,8 @@ This module helps the runner to read course data from json files and return
 lists of Course and Department objects for databse insertion
 """
 
-import json, os
+import json, os, sys
+sys.path.append(os.path.dirname(os.path.abspath(__file__))+'/pb2')
 import course_pb2 as course
 import instructor_pb2 as instructor
 import department_pb2 as department
