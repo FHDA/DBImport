@@ -5,18 +5,18 @@ This module gets lists of Course and Department objects from ReadCourseData.py
 and inserts those data into the desired database
 """
 
-
-import os, json, FHDAlogger
+import json, os, sys, letslog
+sys.path.append(os.path.dirname(os.path.abspath(__file__))+'\\pb2')
 from google.protobuf.json_format import MessageToDict
 from ReadCourseData import from_raw_to_list
 from configparser import ConfigParser
 from pymongo import MongoClient
 from pymongo import errors as mongoerrors
-from pathlib import Path
 
-logger = FHDAlogger.initiateLogger("_InsertDataInfo", "INFO")
+logger = letslog.Letslog(os.path.dirname(os.path.abspath(__file__))+'\\..\\log')
+logger.initiateLogger("_InsertData", "INFO")
 env_config = ConfigParser()
-env_config.read(Path('..') / 'config' / 'setting.config')
+env_config.read(os.path.dirname(os.path.abspath(__file__))+'\\..\\config\\setting.config')
 mongo_config = env_config['MongoDB']
 QUARTER_INDEX = -16
 
@@ -88,10 +88,12 @@ def main():
     With the help of other functions, this main function could read the data from
     JSON files and put them into desired databases.
     """
-    logger.info('InsertData.py Excecution Started.')
+    logger.log('InsertData.py Excecution Started.')
     config = ConfigParser()
-    config.read(Path('..') / 'config' / env_config['Config']['Config_File_Name'])
+    config.read(os.path.dirname(os.path.abspath(__file__))+'\\..\\config\\'+env_config['Config']['Config_File_Name'])
+    logger.log('Config read completed.')
     path = config['locations']['path']
+    logger.log('Processing data files located in: ' + path)
     year = int(config['data_info']['start_year'])
 
     try:
@@ -99,16 +101,19 @@ def main():
             all_quarters_in_year = config['locations'][str(year)].split(',')
             for each_quarter in all_quarters_in_year:
                 quarter_name = each_quarter[:QUARTER_INDEX].replace('_', ' ')
+                logger.log('Inserting %s' % quarter_name)
                 filename = path + each_quarter
+                logger.log(filename)
                 course_raw_data = check_file_open(filename)
                 course_list, department_list = from_raw_to_list(course_raw_data, quarter_name)
                 insert_data(course_list, department_list, quarter_name)
+                logger.log('Inserted %s' % quarter_name)
             year += 1
     except mongoerrors.PyMongoError:
         logger.error('MongoDB error has occurred')
     except (FileNotFoundError, KeyError) as err:
         logger.error(err)
-    logger.info('InsertData.py Excecution Finished.')
+    logger.log('InsertData.py Excecution Finished.')
 
 
 if __name__ == "__main__":
