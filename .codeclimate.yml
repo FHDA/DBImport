@@ -30,8 +30,3 @@ checks:
   identical-code:
     config:
       threshold: 100
-<<<<<<< HEAD
-      
-=======
-      
->>>>>>> 1d0aa48e47fc5f98537a0311fb364adb40c903e3
