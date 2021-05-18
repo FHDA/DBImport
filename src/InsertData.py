@@ -13,12 +13,17 @@ from configparser import ConfigParser
 from pymongo import MongoClient
 from pymongo import errors as mongoerrors
 
+QUARTER_INDEX = -16
+ACTIVE = 'Act'
+REMAIN = 'Rem'
+WAITLIST_REMAIN = 'WL Rem'
+
+
 logger = letslog.Letslog(os.path.dirname(os.path.abspath(__file__))+'\\..\\log')
 logger.initiateLogger("_InsertData", "INFO")
 env_config = ConfigParser()
 env_config.read(os.path.dirname(os.path.abspath(__file__))+'\\..\\config\\setting.config')
 mongo_config = env_config['MongoDB']
-QUARTER_INDEX = -16
 
 def get_db():
     """Get MongoDB username and password from the config file and return the desired database.
@@ -53,7 +58,7 @@ def check_file_open(filename):
     raise FileNotFoundError('File {filename} is not found!')
 
 
-def insert_data(course_list, dept_list, quarter_name):
+def insert_data(course_list, dept_list, enrollment_dict, quarter_name):
     """Insert data into database.
 
     Get every single Course and Department object from the lists and
@@ -63,6 +68,10 @@ def insert_data(course_list, dept_list, quarter_name):
     Args:
         course_list: the list of Course objects
         dept_list: the list of Department objects
+        enrollment_dict: 
+                        Key: course numer(crn)'crn'
+                        Value: A dictionary including enrollment information such as active enrollment number(act), 
+                            remaining open seat number(rem), waitlist remaining(WL Rem), and fetch time(fetch_time).
         quarter_name: str, the name of the quarter
     Raises:
         pymongo.errors: possibly connection errors or configuration errors
@@ -73,13 +82,34 @@ def insert_data(course_list, dept_list, quarter_name):
     database = get_db()
     course_collection = database[quarter_name + ' courses']
     dept_collection = database[quarter_name + ' departments']
+    seat_collection = database[quarter_name + ' seats']
 
     for course in course_list:
         temp_course = MessageToDict(course)
-        course_collection.insert_one(temp_course)
+        course_collection.update(temp_course, temp_course, upsert=True)
     for dept in dept_list:
         temp_dept = MessageToDict(dept)
-        dept_collection.insert_one(temp_dept)
+        dept_collection.update(temp_dept, temp_dept, upsert=True)
+    inserted_seats = seat_collection.find()
+    if (quarter_name + ' seats') not in database.list_collection_names() or inserted_seats.count() == 0:
+        for crn in enrollment_dict.keys():
+            inserted_seat = {'UID': crn, 'latest': enrollment_dict[crn]['fetch_time_datetime'], 
+                                'fetch_time_datetime': [enrollment_dict[crn]['fetch_time_datetime']], 
+                                'fetch_time': [enrollment_dict[crn]['fetch_time']], ACTIVE: [enrollment_dict[crn][ACTIVE]],
+                                REMAIN: [enrollment_dict[crn][REMAIN]], WAITLIST_REMAIN: [enrollment_dict[crn][WAITLIST_REMAIN]]}
+            seat_collection.insert_one(inserted_seat)
+    else:
+        for inserted_seat in inserted_seats:
+            update_seat = inserted_seat
+            crn = inserted_seat['UID']
+            if enrollment_dict[crn]['fetch_time_datetime'] > update_seat['latest']:
+                update_seat['fetch_time_datetime'].append(enrollment_dict[crn]['fetch_time_datetime'])
+                update_seat['fetch_time'].append(enrollment_dict[crn]['fetch_time'])
+                update_seat[ACTIVE].append(enrollment_dict[crn][ACTIVE])
+                update_seat[REMAIN].append(enrollment_dict[crn][REMAIN])
+                update_seat[WAITLIST_REMAIN].append(enrollment_dict[crn][WAITLIST_REMAIN])
+                update_seat['latest'] = enrollment_dict[crn]['fetch_time_datetime']
+                seat_collection.replace_one({'UID': crn}, update_seat)
 
 
 def main():
@@ -105,12 +135,12 @@ def main():
                 filename = path + each_quarter
                 logger.log(filename)
                 course_raw_data = check_file_open(filename)
-                course_list, department_list = from_raw_to_list(course_raw_data, quarter_name)
-                insert_data(course_list, department_list, quarter_name)
+                course_list, department_list, enrollment_dict = from_raw_to_list(course_raw_data, quarter_name)
+                insert_data(course_list, department_list, enrollment_dict, quarter_name)
                 logger.log('Inserted %s' % quarter_name)
             year += 1
-    except mongoerrors.PyMongoError:
-        logger.error('MongoDB error has occurred')
+    except mongoerrors.PyMongoError as err:
+        logger.error(f'MongoDB error has occurred: {err}')
     except (FileNotFoundError, KeyError) as err:
         logger.error(err)
     logger.log('InsertData.py Excecution Finished.')

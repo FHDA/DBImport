@@ -5,12 +5,17 @@ This module helps the runner to read course data from json files and return
 lists of Course and Department objects for databse insertion
 """
 import json, os, sys
+from datetime import datetime
 sys.path.append(os.path.dirname(os.path.abspath(__file__))+'\\pb2')
 import course_pb2 as course
 import instructor_pb2 as instructor
 import department_pb2 as department
 
-def read_course_proto(json_object, course_list, department_name):
+ACTIVE = 'Act'
+REMAIN = 'Rem'
+WAITLIST_REMAIN = 'WL Rem'
+
+def read_course_proto(json_object, course_list, department_name, enrollment_dict):
     """Convert course json object to lists of objects, using Protocol Buffer generated class
 
     With the raw json file of the quarter,
@@ -25,14 +30,19 @@ def read_course_proto(json_object, course_list, department_name):
                           be filled with course objects
       department_name: the department name, used to access the json file
                       and to record what courses are in this department
+      enrollment_dict: 
+                        Key: course numer(crn)'crn'
+                        Value: A dictionary including enrollment information such as active enrollment number(act), 
+                            remaining open seat number(rem), waitlist remaining(WL Rem), and fetch time(fetch_time).
     Raises:
         KeyError: If the attributes provided are not in the json key list
     Returns:
-        The list containing the name of all courses in this department
+        each_department: the list containing the name of all courses in this department
 
     """
     each_department = department.Department()
     each_department.deptName = department_name
+    seat_list = []
     for each_course in json_object['CourseData'][department_name]:
         temp_course = course.Course()
         temp_course.UID = each_course['CRN']
@@ -52,6 +62,9 @@ def read_course_proto(json_object, course_list, department_name):
         temp_course.attribute = each_course['Attribute']
         temp_course = read_lab_time(each_course, temp_course)
         course_list.append(temp_course)
+        enrollment_dict[temp_course.crn] = {'crn': temp_course.crn, 'fetch_time_datetime': json_object['FetchTime'], 
+                                        'fetch_time': datetime.fromtimestamp(json_object['FetchTime']).strftime("%m/%d/%Y, %H:%M:%S"),
+                                        ACTIVE: int(each_course[ACTIVE]), REMAIN: int(each_course[REMAIN]), WAITLIST_REMAIN: int(each_course['WL Rem'])}
         if temp_course not in each_department.courses:
             each_department.courses.append(temp_course)
     return each_department
@@ -95,7 +108,9 @@ def from_raw_to_list(course_raw, quarter_name):
 
     """
     course_list, department_list = [], []
+    enrollment_dict = {}
     for department_name in course_raw[quarter_name]['CourseData']:
+
         department_list.append(read_course_proto(course_raw[quarter_name],
-                                                 course_list, department_name))
-    return course_list, department_list
+                                                 course_list, department_name, enrollment_dict))
+    return course_list, department_list, enrollment_dict
