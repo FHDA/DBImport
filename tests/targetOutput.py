@@ -170,3 +170,134 @@ lab_00011 = course.Course()
 labs.append(lab_35071)
 labs.append(lab_00007)
 labs.append(lab_00011)
+
+seats = []
+secondTimeSeats = []
+
+seat1 = {
+    'crn': '32072',
+    'fetch_time_datetime': 1620739965,
+    'fetch_time': '05/11/2021, 06:32:45',
+    'Act': 40,
+    'Rem': 5,
+    'WL Rem': 5
+}
+
+seat2 = {
+    'crn': '35071',
+    'fetch_time_datetime': 1620739965,
+    'fetch_time': '05/11/2021, 06:32:45',
+    'Act': 40,
+    'Rem': 5,
+    'WL Rem': 5
+}
+
+seat3 = {
+    'crn': '31138',
+    'fetch_time_datetime': 1620739965,
+    'fetch_time': '05/11/2021, 06:32:45',
+    'Act': 17,
+    'Rem': 5,
+    'WL Rem': 5
+}
+
+seat4 = {
+    'crn': '00053',
+    'fetch_time_datetime': 1620739965,
+    'fetch_time': '05/11/2021, 06:32:45',
+    'Act': 41,
+    'Rem': 5,
+    'WL Rem': 15
+}
+
+seat5 = {
+    'crn': '00054',
+    'fetch_time_datetime': 1620739965,
+    'fetch_time': '05/11/2021, 06:32:45',
+    'Act': 29,
+    'Rem': 5,
+    'WL Rem': 15
+}
+
+seat6 = {
+    'crn': '35528',
+    'fetch_time_datetime': 1620739965,
+    'fetch_time': '05/11/2021, 06:32:45',
+    'Act': 0,
+    'Rem': 5,
+    'WL Rem': 0
+}
+
+seats.append(seat1)
+seats.append(seat2)
+seats.append(seat3)
+seats.append(seat4)
+seats.append(seat5)
+seats.append(seat6)
+
+seat1Second = {
+    'UID': '32072',
+    'latest': 1620939965,
+    'fetch_time_datetime': [1620739965, 1620939965],
+    'fetch_time': ['05/11/2021, 06:32:45', '05/13/2021, 14:06:05'],
+    'Act': [40, 40],
+    'Rem': [5, 5],
+    'WL Rem': [5, 5]
+}
+
+seat2Second = {
+    'UID': '35071',
+    'latest': 1620939965,
+    'fetch_time_datetime': [1620739965, 1620939965],
+    'fetch_time': ['05/11/2021, 06:32:45', '05/13/2021, 14:06:05'],
+    'Act': [40, 40],
+    'Rem': [5, 5],
+    'WL Rem': [5, 5]
+}
+
+seat3Second = {
+    'UID': '31138',
+    'latest': 1620939965,
+    'fetch_time_datetime': [1620739965, 1620939965],
+    'fetch_time': ['05/11/2021, 06:32:45', '05/13/2021, 14:06:05'],
+    'Act': [17, 17],
+    'Rem': [5, 5],
+    'WL Rem': [5, 5]
+}
+
+seat4Second = {
+    'UID': '00053',
+    'latest': 1620939965,
+    'fetch_time_datetime': [1620739965, 1620939965],
+    'fetch_time': ['05/11/2021, 06:32:45', '05/13/2021, 14:06:05'],
+    'Act': [41, 41],
+    'Rem': [5, 5],
+    'WL Rem': [15, 15]
+}
+
+seat5Second = {
+    'UID': '00054',
+    'latest': 1620939965,
+    'fetch_time_datetime': [1620739965, 1620939965],
+    'fetch_time': ['05/11/2021, 06:32:45', '05/13/2021, 14:06:05'],
+    'Act': [29, 29],
+    'Rem': [5, 5],
+    'WL Rem': [15, 15]
+}
+
+seat6Second = {
+    'UID': '35528',
+    'latest': 1620939965,
+    'fetch_time_datetime': [1620739965, 1620939965],
+    'fetch_time': ['05/11/2021, 06:32:45', '05/13/2021, 14:06:05'],
+    'Act': [0, 0],
+    'Rem': [5, 5],
+    'WL Rem': [0, 0]
+}
+
+secondTimeSeats.append(seat1Second)
+secondTimeSeats.append(seat2Second)
+secondTimeSeats.append(seat3Second)
+secondTimeSeats.append(seat4Second)
+secondTimeSeats.append(seat5Second)
+secondTimeSeats.append(seat6Second)
