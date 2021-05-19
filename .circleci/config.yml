@@ -3,6 +3,7 @@ jobs:
   test_python:
     docker:
       - image: circleci/python:3.6
+        environment: "America/Los_Angeles"
     steps:
       - checkout
       # - run:
@@ -29,6 +30,7 @@ jobs:
       - store_artifacts:
           path: test-reports/
           destination: python_app
+    environment: "America/Los_Angeles"
   test_git_commit:
     docker: 
       - image: circleci/node:10.0.0
