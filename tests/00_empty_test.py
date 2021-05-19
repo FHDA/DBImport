@@ -1,3 +1,6 @@
+"""This is an empty test."""
+
+
 def test_empty():
     """
     PyTest tests are callables whose names start with "test"

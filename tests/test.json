@@ -1,0 +1,132 @@
+{
+   "Test Data": {
+      "FetchTime": 1620739965,
+      "CourseData": {
+         "ACCT": [
+            {
+               "Select": "C",
+               "CRN": "32072",
+               "Crse": "D001A",
+               "Sec": "12",
+               "Cmp": "DA",
+               "Cred": "5.000",
+               "Title": "FINAN ACCOUNTNG I",
+               "Days": "TR",
+               "Time": "11:00 am-01:15 pm",
+               "Act": "40",
+               "Rem": "5",
+               "WL Rem": "5",
+               "Instructor": "Mary,Amelia,Breen",
+               "Date (MM/DD)": "01/08-03/30",
+               "Location": "DA L84",
+               "Attribute": "",
+               "lab": []
+            },
+            {
+               "Select": "C",
+               "CRN": "35071",
+               "Crse": "D074",
+               "Sec": "01",
+               "Cmp": "DA",
+               "Cred": "5.000",
+               "Title": "ACCOUNTING ETHICS",
+               "Days": "",
+               "Time": "TBA",
+               "Act": "40",
+               "Rem": "5",
+               "WL Rem": "5",
+               "Instructor": "Walter,Michael,Gough",
+               "Date (MM/DD)": "01/08-03/30",
+               "Location": "DA ONLINE",
+               "Attribute": "",
+               "lab": [
+                  {
+                     "Time": "TBA",
+                     "Instructor": "Christopher,C,Kwak",
+                     "Date (MM/DD)": "06/28-08/07",
+                     "Location": "DA LC107"
+                  }
+               ]
+            },
+            {
+               "Select": "C",
+               "CRN": "31138",
+               "Crse": "D105",
+               "Sec": "01",
+               "Cmp": "DA",
+               "Cred": "1.000",
+               "Title": "BASIC FINANCIAL ACCT PROCEDURE",
+               "Days": "T",
+               "Time": "05:00 pm-05:50 pm",
+               "Act": "17",
+               "Rem": "5",
+               "WL Rem": "5",
+               "Instructor": "Laurienne,Bermudez,Hammond",
+               "Date (MM/DD)": "01/08-03/30",
+               "Location": "DA AT202",
+               "Attribute": "",
+               "lab": []
+            }
+         ],
+         "ADMJ": [
+            {
+               "Select": "C",
+               "CRN": "00053",
+               "Crse": "D001",
+               "Sec": "01",
+               "Cmp": "DA",
+               "Cred": "4.000",
+               "Title": "INTRO TO ADMIN OF JUSTICE",
+               "Days": "MTWR",
+               "Time": "08:30 am-09:20 am",
+               "Act": "41",
+               "Rem": "5",
+               "WL Rem": "15",
+               "Instructor": "Marni,Kristine,Lawlor",
+               "Date (MM/DD)": "01/08-03/30",
+               "Location": "DA L22",
+               "Attribute": "",
+               "lab": []
+            },
+            {
+               "Select": "C",
+               "CRN": "00054",
+               "Crse": "D003",
+               "Sec": "01",
+               "Cmp": "DA",
+               "Cred": "4.000",
+               "Title": "CONCEPTS OF CRIM LAW (CP 2)",
+               "Days": "MTWR",
+               "Time": "09:30 am-10:20 am",
+               "Act": "29",
+               "Rem": "5",
+               "WL Rem": "15",
+               "Instructor": "Terry,R,Ellis",
+               "Date (MM/DD)": "01/08-03/30",
+               "Location": "DA L22",
+               "Attribute": "",
+               "lab": []
+            },
+            {
+               "Select": "C",
+               "CRN": "35528",
+               "Crse": "D064Y",
+               "Sec": "56",
+               "Cmp": "DA",
+               "Cred": "3.000",
+               "Title": "ADMJ INTRNSHIP",
+               "Days": "MWF",
+               "Time": "12:30 pm-03:20 pm",
+               "Act": "0",
+               "Rem": "5",
+               "WL Rem": "0",
+               "Instructor": "Terry,R,Ellis",
+               "Date (MM/DD)": "01/08-03/30",
+               "Location": "DA L13C",
+               "Attribute": "",
+               "lab": []
+            }
+        ]
+      }
+   }
+}

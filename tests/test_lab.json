@@ -1,0 +1,80 @@
+{
+   "Test Data": {
+      "FetchTime": 1620939965,
+      "CourseData": {
+         "ACCT": [
+         	{
+               "Select": "C",
+               "CRN": "35071",
+               "Crse": "D074",
+               "Sec": "01",
+               "Cmp": "DA",
+               "Cred": "5.000",
+               "Title": "ACCOUNTING ETHICS",
+               "Days": "",
+               "Time": "TBA",
+               "Act": "40",
+               "Rem": "5",
+               "WL Rem": "5",
+               "Instructor": "Walter,Michael,Gough",
+               "Date (MM/DD)": "01/08-03/30",
+               "Location": "DA ONLINE",
+               "Attribute": "",
+               "lab": [
+                  {
+                     "Time": "TBA",
+                     "Instructor": "Christopher,C,Kwak",
+                     "Date (MM/DD)": "06/28-08/07",
+                     "Location": "DA LC107"
+                  }
+               ]
+            },
+            {
+                "Select": "C",
+                "CRN": "00007",
+                "Crse": "D001A",
+                "Sec": "61Z",
+                "Cmp": "DA",
+                "Cred": "4.000",
+                "Title": "FINAN ACCOUNTNG I",
+                "Days": "",
+                "Time": "TBA",
+                "Act": "57",
+                "Rem": "3",
+                "WL Rem": "10",
+                "Instructor": "Walter,Michael,Gough",
+                "Date (MM/DD)": "06/28-08/07",
+                "Location": "DA LC107",
+                "Attribute": "",
+                "lab": [
+                    {
+                        "Time": "TBA",
+                        "Instructor": "Walter,Michael,Gough",
+                        "Date (MM/DD)": "06/28-08/07",
+                        "Location": "DA LC107"
+                    }
+                ]
+             },
+             {
+                "Select": "C",
+                "CRN": "00011",
+                "Crse": "D001B",
+                "Sec": "61Z",
+                "Cmp": "DA",
+                "Cred": "4.000",
+                "Title": "FINAN ACCOUNTG II",
+                "Days": "",
+                "Time": "TBA",
+                "Act": "43",
+                "Rem": "7",
+                "WL Rem": "10",
+                "Instructor": "Christopher,C,Kwak",
+                "Date (MM/DD)": "06/28-08/07",
+                "Location": "DA LC107",
+                "Attribute": "",
+                "lab": []
+             }
+           ]
+        }
+    }
+}
